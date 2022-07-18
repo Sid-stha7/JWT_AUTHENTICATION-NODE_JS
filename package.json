@@ -1,0 +1,28 @@
+{
+  "name": "jwt_authentication-node_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sid-stha7/JWT_AUTHENTICATION-NODE_JS.git"
+  },
+  "author": "siddhartha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sid-stha7/JWT_AUTHENTICATION-NODE_JS/issues"
+  },
+  "homepage": "https://github.com/Sid-stha7/JWT_AUTHENTICATION-NODE_JS#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.4",
+    "nodemon": "^2.0.19"
+  }
+}
