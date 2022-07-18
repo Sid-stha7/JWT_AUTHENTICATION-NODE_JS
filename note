@@ -1,0 +1,35 @@
+Embedded JavaScript templates(EJS)
+
+Control flow with <% %>
+Escaped output with <%= %> (escape function configurable)
+Unescaped raw output with <%- %>
+Newline-trim mode ('newline slurping') with -%> ending tag
+Whitespace-trim mode (slurp all whitespace) for control flow with <%_ _%>
+Custom delimiters (e.g. [? ?] instead of <% %>)
+Includes
+Client-side support
+Static caching of intermediate JavaScript
+Static caching of templates
+Complies with the Express view system
+
+
+
+REST
+CLIENT
+            C   HTTP POST/api/devices+payload
+                -201+Location
+                         
+            R   -HTTP GET/api/devices
+               -200+ payload
+                    
+                    
+            U   HTTP PUT/api/devices/1+payload-200
+                    
+            
+            D   -HTTP DELETE/api/devices/1-200 
+                                        
+  RESTSERVER
+
+
+  # Default express error handler gives a html content in order to change that modify that we need to add a middle ware 
+  
