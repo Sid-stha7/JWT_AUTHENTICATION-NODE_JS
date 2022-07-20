@@ -3,8 +3,16 @@ const dotenv = require ("dotenv").config()
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000
 const { errorHandler } = require("../middleware/errorMiddleware")
+const colors = require("colors")
+const connectDB = require("./config/db")
 
+
+connectDB()
 const app = express()
+
+
+//DB connection 
+
 
 //middleware 
 app.use(express.json());
