@@ -33,3 +33,11 @@ CLIENT
 
   # Default express error handler gives a html content in order to change that modify that we need to add a middle ware 
   
+
+# Fist route is created then the rotue is pointed to the controller to its correspondance logic/methods/fucntions then the route is defined in the server.js or we called the main file 
+
+ # we will use bcrypt js package to encrypt our password and also JSONwebtoken
+
+ # we have to protect our route for some cases , lets say for the private functions like getting user data when particular user logs in 
+ # the way we do it is we create a custom middleware as middleware is a function that runs during the response cycle , 
+ # so when we send a route or some request to the endpoint the custom (middleware)  gonna validate the JWT token  
