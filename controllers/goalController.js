@@ -1,4 +1,5 @@
 const Goal = require ("../backend/models/goalModel")
+const User = require ("../backend/models/userModel")
 
 /**since we are woking with error handles we wont use async await try catch 
  * cuz we will be using  asyncHandler from express
@@ -9,8 +10,13 @@ const asyncHandler= require("express-async-handler")
 //@route GET /api/goals
 // @access  Private
 const getGoal = asyncHandler(async (req, res)=>{
-    const goals = await Goal.find() /**here what we did is we first imported out models then from the models which is 
+    const goals = await Goal.find({user: req.user.id}) /**here what we did is we first imported out models then from the models which is 
     in mongo db we ahave find method find() can find from user or id or whatever we want  */
+
+    /**he what happened is the user object can be accesed through the middleware which is our jwt authentication 
+     * middleware of the particular user so when token is passed or request is made by that token 
+     * it will access the goals of that particular user by matching id of the user 
+     */
 
     res.status(200).json(goals)
     console.log("Got goals from database");
@@ -29,11 +35,12 @@ const setGoal = asyncHandler(async (req, res)=>{
     }
     
     const goals = await Goal.create({/**in order to set goals we hace create() function**/
-        text : req.body.text 
+        text : req.body.text,
+        user : req.user.id ,
     }) 
 
     res.status(200).json(goals)
-    console.log("fetched goals from database ");
+    console.log(`created goals for user ${req.user.id}`);
     res.status(200).json({message: "Create goals"})
     console.log(req.body);
 })
@@ -48,6 +55,18 @@ const updateGoal = asyncHandler(async (req, res)=>{
     if (!goal) {
         res.status(400)
         throw new Error('Goal not found')
+    }
+
+    const user = await User.findById(req.user.id)
+    //check user
+    if (!user) {
+        res.status(4001)
+        throw new Error ("no user found")
+    }
+    //make sure the logged in user matches the goal user
+    if(goal.user.toString() !== user.id){
+        res.status(401)
+        throw new Error ('user not authorized ')
     }
     
     const updateGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {new: true})
@@ -71,6 +90,18 @@ const deleteGoal =asyncHandler( async (req, res)=>{
     if (!goal) {
         res.status(400)
         throw new Error('Goal not found so cant be deleted')
+    }
+
+    const user = await User.findById(req.user.id)
+    //check user
+    if (!user) {
+        res.status(4001)
+        throw new Error ("no user found")
+    }
+    //make sure the logged in user matches the goal user
+    if(goal.user.toString() !== user.id){
+        res.status(401)
+        throw new Error ('user not authorized ')
     }
 
     await goal.remove()

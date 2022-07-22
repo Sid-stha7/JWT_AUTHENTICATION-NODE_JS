@@ -53,32 +53,27 @@ const registerUser = asyncHandler(async (req, res) => {
 //@desc authenticate user
 //@route POST /api/login
 // @access  public
-const  loginUser= asyncHandler(async (req, res)=>{
-    const {email, password}= req.body //get email and password from body 
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body //get email and password from body 
     
     //check for user email
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
 
     //authenticate with database
     /**the password is hashed so inorder to compare the password we have method called compared from bcrypt module  
      * bcrypt compare methods takes two arguments that is password that user inputs and password thats hashed*/ 
-    if (user &&(await bcrypt.compare(password, user.password))) {
-        
-        res.json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id),
-        })
+     if (user && (await bcrypt.compare(password, user.password))) {
+      res.json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid credentials')
     }
-    else{
-        res.status(400)
-        throw new Error('Invalid credentials ')
-    }
-
-    res.json({message: "login user"})
-
-})
+  })
 //@desc get user data 
 //@route GET /api/users/me
 // @access  private
