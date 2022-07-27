@@ -41,3 +41,8 @@ CLIENT
  # we have to protect our route for some cases , lets say for the private functions like getting user data when particular user logs in 
  # the way we do it is we create a custom middleware as middleware is a function that runs during the response cycle , 
  # so when we send a route or some request to the endpoint the custom (middleware)  gonna validate the JWT token  
+
+
+
+ #redux is state management library , insead state various part of UI  we save all the application in store in single js object . they will get what they need from store , it is used to sync UI states.
+ 
