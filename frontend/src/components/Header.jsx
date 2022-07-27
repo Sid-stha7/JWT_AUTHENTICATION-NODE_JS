@@ -21,11 +21,13 @@ function Header() {
       <ul>
         {user ? ( // if user then show (somethin):else (something)
           <li>
-            <button className="btn" onClick={onlogout}>
-              <Link to="/login">
-                <FaSignOutAlt /> Logout
-              </Link>
-            </button>
+            <div>
+              <button className="btn btn-primary btn-block" onClick={onlogout}>
+                <Link to="/login">
+                  <FaSignOutAlt /> Logouts
+                </Link>
+              </button>
+            </div>
           </li>
         ) : (
           <>

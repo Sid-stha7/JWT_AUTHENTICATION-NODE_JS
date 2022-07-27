@@ -3,7 +3,9 @@ import authService from "./authService";
 
 //Get user from LocalStorage
 const user = JSON.parse(localStorage.getItem("user"));
-
+/**We get back basic user data and JWT token when login/register we need to access protected route
+ * we gonna save it to local storage
+ */
 const initialState = {
   user: user ? user : null,
   isError: false,
@@ -30,10 +32,10 @@ export const register = createAsyncThunk(
   }
 );
 
-// login user
+// Login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
-    return await authService.register(user);
+    return await authService.login(user);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -93,9 +95,6 @@ export const authSlice = createSlice({
       });
   },
 });
-/**We get back basic user data and JWT token when login/register we need to access protected route
- * we gonna save it to local storage
- */
 
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

@@ -5,6 +5,7 @@ const API_URL = "/api/users/";
 /**just like we did in post man we do it by axios */
 //register user
 
+// Register user
 const register = async (userData) => {
   const response = await axios.post(API_URL, userData);
 
@@ -15,7 +16,7 @@ const register = async (userData) => {
   return response.data;
 };
 
-//login
+// Login user
 const login = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
@@ -30,6 +31,7 @@ const login = async (userData) => {
 const logout = () => {
   localStorage.removeItem("user");
 };
+
 const authService = {
   register,
   logout,

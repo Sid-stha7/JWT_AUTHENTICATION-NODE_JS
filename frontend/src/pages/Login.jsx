@@ -7,7 +7,8 @@ import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Login() {
-  /**since we have to rerender the form time and again use gonna use
+  /**use state changes the value of the local state into new state value and rerenders when there is a change in value+++++++
+   * since we have to rerender the form time and again use gonna use
    * useState what use state basically does is it re renders the react component
    * while we input the text in form field it will not update because there is no state change
    * the initial state of form has all blank in it  because the react rendered the component only once
@@ -35,8 +36,9 @@ function Login() {
     if (isSuccess || user) {
       navigate("/");
     }
+
     dispatch(reset());
-  }, [user, message, isError, isSuccess, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -44,11 +46,6 @@ function Login() {
       [e.target.name]: e.target.value,
     }));
   };
-
-  if (isLoading) {
-    <Spinner />;
-  }
-
   const onSubmit = (e) => {
     e.preventDefault(); //prevents from its default action like no submiting form when click submit
     const userData = {
@@ -57,6 +54,9 @@ function Login() {
     };
     dispatch(login(userData));
   };
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
