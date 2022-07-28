@@ -8,7 +8,7 @@ function Header() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const onlogout = () => {
+  const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
@@ -21,13 +21,9 @@ function Header() {
       <ul>
         {user ? ( // if user then show (somethin):else (something)
           <li>
-            <div>
-              <button className="btn btn-primary btn-block" onClick={onlogout}>
-                <Link to="/login">
-                  <FaSignOutAlt /> Logouts
-                </Link>
-              </button>
-            </div>
+            <button className="btn" onClick={onLogout}>
+              <FaSignOutAlt /> Logout
+            </button>
           </li>
         ) : (
           <>

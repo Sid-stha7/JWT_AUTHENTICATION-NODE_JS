@@ -20,7 +20,7 @@ function Dashboard() {
     if (!user) {
       navigate("/login");
     }
-    dispatch(getGoals);
+    dispatch(getGoals());
 
     return () => {
       dispatch(reset);
@@ -28,7 +28,7 @@ function Dashboard() {
   }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
-    <Spinner />;
+    return <Spinner />;
   }
   return (
     <>
@@ -41,7 +41,7 @@ function Dashboard() {
         {goals.length > 0 ? (
           <div className="goals">
             {goals.map((goal) => (
-              <GoalItem key={goal.id} goal={goal} />
+              <GoalItem key={goal._id} goal={goal} />
             ))}
           </div>
         ) : (
